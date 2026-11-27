@@ -1,0 +1,28 @@
+[package]
+name = "frontend"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# Two bundles from one crate: `public` (sign-in, legal, unsubscribe) and `app` (signed in).
+[features]
+default = ["app"]
+app = []
+public = []
+
+[dependencies]
+shared = { path = "../shared" }
+serde.workspace = true
+serde_json.workspace = true
+iced = { version = "0.13.1", default-features = false, features = ["tiny-skia", "web-colors", "svg"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2.130"
+wasm-bindgen-futures = "0.4"
+console_error_panic_hook = "0.1"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = ["Window", "Document", "History", "Location", "Event", "EventTarget", "Blob", "BlobPropertyBag", "Url", "HtmlAnchorElement", "HtmlElement", "Element", "Node", "Navigator"] }
+reqwest = { version = "0.12", default-features = false }
+rfd = { version = "0.15", default-features = false, features = ["xdg-portal", "tokio"] }

@@ -1,0 +1,60 @@
+[workspace]
+resolver = "2"
+members = ["shared","configs","database","auth","query_engine","backend","gateway","worker","frontend","tests"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "UNLICENSED"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["std","clock","serde"] }
+uuid = { version = "1", features = ["v4","serde"] }
+tokio = { version = "1", features = ["rt-multi-thread","macros","net","time","sync","signal","fs","process"] }
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio","postgres","chrono","uuid","json","migrate","macros"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+sha2 = "0.10"
+rand = "0.8"
+hex = "0.4"
+csv = "1"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+# Iced 0.13 software renderer panics when the canvas has size 0 at start (ADR 0004).
+[patch.crates-io]
+iced_tiny_skia = { path = "vendor/iced_tiny_skia" }
+
+# The rest of the bundle is built for size (opt-level "z"). The drawing code runs on every
+# frame in the browser and is many times slower at "z", so it is built for speed.
+[profile.release.package.tiny-skia]
+opt-level = 3
+[profile.release.package.tiny-skia-path]
+opt-level = 3
+[profile.release.package.iced_tiny_skia]
+opt-level = 3
+[profile.release.package.softbuffer]
+opt-level = 3
+[profile.release.package.cosmic-text]
+opt-level = 3
+[profile.release.package.swash]
+opt-level = 3
+[profile.release.package.rustybuzz]
+opt-level = 3
+[profile.release.package.ttf-parser]
+opt-level = 3
+[profile.release.package.iced_graphics]
+opt-level = 3
+[profile.release.package.iced_core]
+opt-level = 3
+[profile.release.package.iced_widget]
+opt-level = 3
+[profile.release.package.kurbo]
+opt-level = 3

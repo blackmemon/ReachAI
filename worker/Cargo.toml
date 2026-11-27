@@ -1,0 +1,21 @@
+[package]
+name = "worker"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+name = "worker"
+path = "src/lib.rs"
+
+[[bin]]
+name = "blackmemon-worker"
+path = "src/main.rs"
+
+[dependencies]
+configs = { path = "../configs" }
+database = { path = "../database" }
+backend = { path = "../backend" }
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+sqlx.workspace = true

@@ -1,0 +1,13 @@
+PASS privacy page draws a canvas
+PASS unsubscribe sets do-not-contact
+PASS wrong password stays on sign-in
+PASS right password opens the app
+PASS session cookie works
+PASS 26 pages opened with no script error
+PASS empty form saves nothing
+PASS new person is in the database
+PASS sign out returns to sign-in
+PASS session is gone after sign out
+PASS phone layout signs in
+
+11 of 11 browser steps passed. Screenshots: /home/claude/shots/final

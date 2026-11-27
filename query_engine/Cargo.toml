@@ -1,0 +1,11 @@
+[package]
+name = "query_engine"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+shared = { path = "../shared" }
+sqlx.workspace = true
+chrono.workspace = true
+serde_json.workspace = true
+csv.workspace = true

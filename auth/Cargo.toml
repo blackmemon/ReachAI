@@ -1,0 +1,12 @@
+[package]
+name = "auth"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+argon2 = { version = "0.5", features = ["std"] }
+hmac = "0.12"
+sha2.workspace = true
+rand.workspace = true
+hex.workspace = true
+shared = { path = "../shared" }

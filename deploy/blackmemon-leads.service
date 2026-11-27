@@ -1,0 +1,18 @@
+[Unit]
+Description=blackmemon ReachAI gateway
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+User=leads
+EnvironmentFile=/etc/blackmemon-leads/env
+WorkingDirectory=/opt/blackmemon-leads
+ExecStart=/opt/blackmemon-leads/bin/blackmemon-leads serve
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
